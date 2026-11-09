@@ -5,7 +5,7 @@ namespace Dadata;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Middleware;
-use GuzzleHttp\Psr7;
+use GuzzleHttp\Psr7\Utils;
 use GuzzleHttp\Psr7\Response;
 
 abstract class BaseTest extends \PHPUnit\Framework\TestCase
@@ -15,7 +15,7 @@ abstract class BaseTest extends \PHPUnit\Framework\TestCase
     protected $history;
     protected $handler;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->mock = new MockHandler();
         $this->handler = HandlerStack::create($this->mock);
@@ -26,7 +26,7 @@ abstract class BaseTest extends \PHPUnit\Framework\TestCase
 
     protected function mockResponse($data)
     {
-        $body = Psr7\stream_for(json_encode($data));
+        $body = Utils::streamFor(json_encode($data));
         $response = new Response(200, [], $body);
         $this->mock->append($response);
     }
