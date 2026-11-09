@@ -11,7 +11,7 @@ Thin PHP wrapper over Dadata API.
 ## Installation
 
 ```sh
-composer require hflabs/dadata
+composer require lfcuser/dadata
 ```
 
 Requirements:
